@@ -1,4 +1,3 @@
-# rubocop:disable Lint/UselessAssignment, Metrics/LineLength
 require "spec_helper"
 
 describe "an Active Record model which includes PgSearch" do
@@ -1260,7 +1259,7 @@ describe "an Active Record model which includes PgSearch" do
           @multisearch_enabled_inside = PgSearch.multisearch_enabled?
           raise
         end
-      rescue # rubocop:disable Lint/HandleExceptions
+      rescue
       end
 
       @multisearch_enabled_after = PgSearch.multisearch_enabled?
