@@ -33,13 +33,19 @@ module PgSearch
     delegate :connection, :quoted_table_name, :to => :@model
 
     def conditions
-      config.features.reject do |_feature_name, feature_options|
+      conditions = config.features.reject do |_feature_name, feature_options|
         feature_options && feature_options[:sort_only]
-      end.map do |feature_name, _feature_options|
+      end
+
+      conditions.map! do |feature_name, _feature_options|
         feature_for(feature_name).conditions
-      end.inject do |accumulator, expression|
+      end
+
+      conditions = conditions.inject do |accumulator, expression|
         Arel::Nodes::Or.new(accumulator, expression)
-      end.to_sql
+      end
+
+      conditions.to_sql
     end
 
     def order_within_rank
