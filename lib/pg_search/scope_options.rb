@@ -64,6 +64,7 @@ module PgSearch
 
     FEATURE_CLASSES = {
       :dmetaphone => Features::DMetaphone,
+      :dmetaphone_alt => Features::DMetaphoneAlt,
       :tsearch => Features::TSearch,
       :trigram => Features::Trigram
     }
